@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { Suspense, useState, useEffect } from "react"
 import { useSearchParams } from "next/navigation"
 import { Search, SlidersHorizontal, Sparkles, Palette, Code2, Zap, Megaphone, BarChart3 } from "lucide-react"
 import { tools as allTools, type Tool } from "@/lib/data/tools"
@@ -17,7 +17,7 @@ const iconMap: Record<string, React.ReactNode> = {
     BarChart3: <BarChart3 className="h-4 w-4" />,
 }
 
-export default function ToolsPage() {
+function ToolsContent() {
     const searchParams = useSearchParams()
     const [query, setQuery] = useState(searchParams.get("q") ?? "")
     const [selectedCategory, setSelectedCategory] = useState(searchParams.get("category") ?? "all")
@@ -170,5 +170,13 @@ export default function ToolsPage() {
                 </div>
             </div>
         </div>
+    )
+}
+
+export default function ToolsPage() {
+    return (
+        <Suspense fallback={<div className="container py-20 text-center text-muted-foreground">Loading tools...</div>}>
+            <ToolsContent />
+        </Suspense>
     )
 }
