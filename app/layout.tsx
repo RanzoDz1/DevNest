@@ -22,12 +22,23 @@ export const metadata: Metadata = {
         title: siteConfig.name,
         description: siteConfig.description,
         siteName: siteConfig.name,
+        images: [
+            {
+                url: "/og-image.jpg",
+                width: 1200,
+                height: 630,
+            },
+        ],
     },
     twitter: {
         card: "summary_large_image",
         title: siteConfig.name,
         description: siteConfig.description,
         creator: "@devnest",
+    },
+    icons: {
+        icon: "/favicon.png",
+        apple: "/apple-touch-icon.png",
     },
 }
 
