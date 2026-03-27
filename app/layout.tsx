@@ -3,6 +3,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Navbar } from "@/components/layout/navbar"
 import { Footer } from "@/components/layout/footer"
 import { siteConfig } from "@/config/site"
+import { SmoothScroll } from "@/components/SmoothScroll"
 import "@/styles/globals.css"
 
 export const metadata: Metadata = {
@@ -51,6 +52,7 @@ export default function RootLayout({
                         <Navbar />
                         <main className="flex-1">{children}</main>
                         <Footer />
+                        <SmoothScroll />
                     </div>
                 </ThemeProvider>
             </body>

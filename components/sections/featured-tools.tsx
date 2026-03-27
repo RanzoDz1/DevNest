@@ -22,11 +22,15 @@ export function FeaturedTools() {
                 </Link>
             </div>
 
-            {/* Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {tools.map((tool) => (
-                    <ToolCard key={tool.slug} tool={tool} />
-                ))}
+            {/* Marquee Loop */}
+            <div className="relative w-full overflow-hidden flex [mask-image:linear-gradient(to_right,transparent_0,black_64px,black_calc(100%-64px),transparent_100%)] py-4">
+                <div className="flex animate-marquee gap-4 pr-4 w-max hover:[animation-play-state:paused]">
+                    {[...tools, ...tools, ...tools, ...tools].map((tool, index) => (
+                        <div key={`${tool.slug}-${index}`} className="w-[320px] md:w-[380px] shrink-0">
+                            <ToolCard tool={tool} />
+                        </div>
+                    ))}
+                </div>
             </div>
 
             <Link
