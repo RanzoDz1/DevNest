@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Menu, X, Layers } from "lucide-react"
 import { ThemeToggle } from "@/components/layout/theme-toggle"
 import { siteConfig } from "@/config/site"
@@ -11,9 +11,24 @@ import { cn } from "@/lib/utils"
 export function Navbar() {
     const pathname = usePathname()
     const [mobileOpen, setMobileOpen] = useState(false)
+    const [hidden, setHidden] = useState(false)
+    const lastY = useRef(0)
+
+    useEffect(() => {
+        const onScroll = () => {
+            const y = window.scrollY;
+            setHidden(y > 100 && y > lastY.current);
+            lastY.current = y;
+        };
+        window.addEventListener("scroll", onScroll, { passive: true });
+        return () => window.removeEventListener("scroll", onScroll);
+    }, []);
 
     return (
-        <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-md">
+        <header
+            className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-md transition-transform duration-300"
+            style={{ transform: hidden ? "translateY(-100%)" : "translateY(0)" }}
+        >
             <div className="container flex h-16 items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2 group">

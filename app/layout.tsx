@@ -4,6 +4,7 @@ import { Navbar } from "@/components/layout/navbar"
 import { Footer } from "@/components/layout/footer"
 import { siteConfig } from "@/config/site"
 import { SmoothScroll } from "@/components/SmoothScroll"
+import ClientBootstrap from "@/components/ClientBootstrap"
 import "@/styles/globals.css"
 
 export const metadata: Metadata = {
@@ -65,6 +66,7 @@ export default function RootLayout({
                         <main className="flex-1">{children}</main>
                         <Footer />
                         <SmoothScroll />
+                        <ClientBootstrap />
                     </div>
                 </ThemeProvider>
             </body>
